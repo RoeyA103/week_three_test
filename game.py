@@ -55,6 +55,9 @@ class Game:
 
             attacked.hp -= dameg
 
+            if hasattr(attacked, 'type'):
+                if attacked.type == "goblin" and attacked.run_away():
+                    break
 
             turn += 1
 
