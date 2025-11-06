@@ -24,8 +24,16 @@ wepon: {self.weapon[0]}
     def speak(self):
         print(f"the {self.type} {self.name} is angry")
 
-    def run_away(self):
-        pass
+    def run_away(self)-> bool:
+        if self.hp < 10:
+            print(f"the {self.type} is trying to run away..")
+            if randint(1,3) ==  3:
+                print(f"the {self.type} run away")
+                return True
+            else:
+                print(f"the {self.type} faild\n")   
+                return False
+
 
     def attack(self, attacked, is_munster=True):
         return super().attack(attacked, is_munster)
