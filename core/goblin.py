@@ -3,8 +3,8 @@ from random import randint , choice
 
 class Goblin(Creature):
     weapons = [('Knife',0.5), ('Sword',1) , ('Axe',1.5)]
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name,roll_dice):
+        super().__init__(name,roll_dice)
         self.hp = 20
         self.type = "goblin"
         self.speed = randint(5,10)

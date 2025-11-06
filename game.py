@@ -13,23 +13,24 @@ class Game:
             user_choise = input()
         return int(user_choise)
 
-    def roll_dice(self,sides):
+    @staticmethod
+    def roll_dice(sides):
         return randint(1,sides)
 
     def creat_player(self):
-        player = Player("dani")
+        player = Player("dani",Game.roll_dice)
         return player
 
     def choose_random_monster(self)->Orc | Goblin:
         monster_class = choice([Orc,Goblin])
-        monster = monster_class("blublu")
+        monster = monster_class("blublu",Game.roll_dice)
         return monster
     
     def battle(self,player,monster)-> int:
         players = [player,monster]
         def chose_first():
-            p_roll = self.roll_dice(6)
-            m_roll = self.roll_dice(6)
+            p_roll = Game.roll_dice(6)
+            m_roll = Game.roll_dice(6)
             if p_roll >= m_roll:
                 return 0
             return 1
@@ -41,18 +42,22 @@ class Game:
            
             attacker = players[turn % 2]
             attacked = players[(turn+1) % 2]
+
             
             print(f"attacker = {attacker.name} , attacked = {attacked.name}")
 
+            attacker.speak()
+            print()
+
             dameg  = attacker.attack(attacked)
  
-            print(f"{attacked.name}:hp = {attacked.hp} - damage = {dameg} = total = {attacked.hp - dameg}")
+            print(f"{attacked.name}: hp: {attacked.hp} - damage:{dameg}\ntotal = {max((attacked.hp - dameg) , 0)}\n")
 
             attacked.hp -= dameg
 
             turn += 1
 
-        print("player won!!") if player.hp else print("monster won!!")
+        print(f"{player.name} won!!") if player.hp else print(f"{monster.name} won!!")
         
 
     def start(self):

@@ -3,8 +3,8 @@ from core.creature import Creature
 
 class Player(Creature):
     profession = ['warrior','healer']
-    def __init__(self,name:str):
-        super().__init__(name)
+    def __init__(self,name:str,roll_dice):
+        super().__init__(name,roll_dice)
         self.profession = choice(Player.profession)
         self.hp = 50 
         self.speed = randint(5,10)
@@ -26,3 +26,6 @@ armor: {self.armor_rating}\n
     
     def attack(self, attacked, is_munster=False):
         return super().attack(attacked, is_munster=False)
+    
+    def speak(self):
+        print(f"{self.name} is happy!!")
